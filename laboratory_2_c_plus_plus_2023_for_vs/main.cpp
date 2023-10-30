@@ -2,12 +2,17 @@
 //
 
 #include <iostream>
+#include <string>
+#include "work_with_strings.h"
 
 using namespace std;
 
 
 int main() {
-    cout << "Hello World!\n";
+  string text = "hello he my namenamenamememe is  is";
+  cout << text << endl;
+  make_digraph_map(text);
+  return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
