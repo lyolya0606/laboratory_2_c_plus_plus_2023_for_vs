@@ -4,6 +4,6 @@
 #include <string>
 #include <map>
 
-std::map<std::string, int> make_digraph_map(std::string str);
+std::map<std::string, int> make_graph_map(std::string str, int size);
 
 #endif //WORK_WITH_STRINGS

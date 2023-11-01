@@ -11,7 +11,7 @@ using namespace std;
 int main() {
   string text = "hello he my namenamenamememe is  is";
   cout << text << endl;
-  make_digraph_map(text);
+  make_graph_map(text, 2);
   return 0;
 }
 
