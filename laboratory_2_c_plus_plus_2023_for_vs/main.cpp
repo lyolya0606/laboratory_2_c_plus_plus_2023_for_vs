@@ -31,7 +31,7 @@ int main() {
 
       case TEXT_WORK: {
         string text = "hehehe  hello mym  my nema ff";
-        get_encrypted_text(text, 2);
+        get_encrypted_text(2);
         stop = true;
         break;
       }

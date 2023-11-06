@@ -7,8 +7,21 @@
 #include <iomanip>
 #include <stdlib.h>
 #include <ctime>
+#include "beginning.h"
+#include "checking_errors.h"
+#include "input.h"
 
 using namespace std;
+
+enum input_choice {
+  KEYBOARD_INPUT = 1,
+  FILE_INPUT
+};
+
+enum encrypt_decrypt {
+  ENCRYPT = 1,
+  DECRYPT
+};
 
 vector<char> get_unused_ascii(string text) {
   vector<char> all_ascii;
@@ -66,7 +79,39 @@ void print_map(map<string, int> map_to_print) {
   }
 }
 
+string work_with_input() {
+  int user_choice;
+  bool stop;
+  string text{};
+  do {
+    menu_work_text();
+    user_choice = get_int();
 
+    switch (user_choice) {
+
+    case KEYBOARD_INPUT:
+    {
+      text = keyboard_input();
+      //saving_files_input(text, "input");
+      stop = true;
+    }
+    break;
+
+    case FILE_INPUT:
+    {
+      text = file_input();
+      stop = true;
+    }
+    break;
+
+    default:
+      cout << "There is no such choice!" << endl;
+      stop = false;
+    }
+
+  } while (!stop);
+  return text;
+}
 
 
 map<string, int> make_graph_map(string str, int size) {
@@ -90,7 +135,36 @@ map<string, int> make_graph_map(string str, int size) {
   return graph_map;
 }
 
-string get_encrypted_text(string text, int size) {
+string get_encrypted_text(int size) {
+  int user_choice;
+  bool stop;
+  string text{};
+
+  do {
+    menu_encr_or_decr();
+    user_choice = get_int();
+
+    switch (user_choice) {
+
+    case ENCRYPT: {
+      text = work_with_input();
+      stop = true;
+    }
+    break;
+
+    case DECRYPT: {
+
+      stop = true;
+    }
+    break;
+
+    default:
+      cout << "There is no such choice!" << endl;
+      stop = false;
+    }
+
+  } while (!stop);
+
   string result_text{ "" };
   map<string, int> graph_map = make_graph_map(text, size);
   map<string, char> table = make_table_for_encryption(graph_map, text);

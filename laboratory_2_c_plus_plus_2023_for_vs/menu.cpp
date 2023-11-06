@@ -11,3 +11,8 @@ void menu_work_text() {
   cout << endl << "Press 1 to enter text from the keyboard" << endl
     << "Press 2 to enter text from the file" << endl;
 }
+
+void menu_encr_or_decr() {
+  cout << endl << "Press 1 to encrypt" << endl
+    << "Press 2 to decrpypt" << endl;
+}
