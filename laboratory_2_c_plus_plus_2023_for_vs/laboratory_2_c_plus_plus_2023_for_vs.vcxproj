@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,10 +128,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="checking_errors.cpp" />
+    <ClCompile Include="file_errors.cpp" />
+    <ClCompile Include="greeting.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="work_with_strings.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="beginning.h" />
+    <ClInclude Include="checking_errors.h" />
+    <ClInclude Include="file_errors.h" />
     <ClInclude Include="work_with_strings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

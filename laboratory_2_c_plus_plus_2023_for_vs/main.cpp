@@ -1,27 +1,65 @@
-// laboratory_2_c_plus_plus_2023_for_vs.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
-#include <string>
+#include "beginning.h"
+#include "checking_errors.h"
 #include "work_with_strings.h"
+//#include "test.h"
 
-using namespace std;
+using  namespace std;
+
+enum action_with_text {
+  TEXT_WORK = 1,
+  TEXT_TEST
+};
+
+enum end_of_program {
+  QUIT = 1,
+  CONTINUE
+};
 
 
 int main() {
-  string text = "hello he my namenamenamememe is  is";
-  cout << text << endl;
-  make_graph_map(text, 2);
+  greeting();
+  int user_choice;
+  bool stop;
+
+  do {
+    do {
+      main_menu();
+      user_choice = get_int();
+
+      switch (user_choice) {
+
+      case TEXT_WORK: {
+        string text = "hehehe  hello mym  my nema ff";
+        get_encrypted_text(text, 2);
+        stop = true;
+        break;
+      }
+
+      case TEXT_TEST: {
+        //checking_tests();
+        stop = true;
+        break;
+      }
+
+      default:
+        cout << "There is no such choice!" << endl;
+        stop = false;
+      }
+
+    } while (!stop);
+
+    do {
+      cout << endl << "Press 1 to finish" << endl;
+      cout << "Press 2 to continue" << endl;
+      user_choice = get_int();
+
+      if (user_choice != QUIT && user_choice != CONTINUE) {
+        cout << "There is no such choice!" << endl;
+      }
+    } while (user_choice != QUIT && user_choice != CONTINUE);
+
+  } while (user_choice != QUIT);
+
   return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
