@@ -134,6 +134,7 @@
     <ClCompile Include="input.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="menu.cpp" />
+    <ClCompile Include="saving_files.cpp" />
     <ClCompile Include="work_with_strings.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -141,6 +142,7 @@
     <ClInclude Include="checking_errors.h" />
     <ClInclude Include="file_errors.h" />
     <ClInclude Include="input.h" />
+    <ClInclude Include="saving_files.h" />
     <ClInclude Include="work_with_strings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

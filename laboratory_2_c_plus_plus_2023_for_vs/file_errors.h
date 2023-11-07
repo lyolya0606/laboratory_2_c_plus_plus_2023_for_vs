@@ -10,4 +10,4 @@ std::ofstream open_file_output();
 std::ifstream open_file_input();
 
 
-#endif FILE_ERRORS_H
+#endif //FILE_ERRORS_H

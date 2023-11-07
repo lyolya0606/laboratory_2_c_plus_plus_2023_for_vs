@@ -10,6 +10,7 @@
 #include "beginning.h"
 #include "checking_errors.h"
 #include "input.h"
+#include "saving_files.h"
 
 using namespace std;
 
@@ -55,9 +56,9 @@ map<string, char> make_table_for_encryption(map<string, int> map_for_encryption,
 
   int index{ -1 };
 
-  map<string, int>::iterator it = map_for_encryption.begin();
+  auto it = map_for_encryption.begin();
   while (it != map_for_encryption.end()) {
-    srand(time(NULL));
+    srand(time(nullptr));
     index = rand() % list_for_rand.size();
     //index = (int)(tmp * 100) / 100.0;
     table[it->first] = all_ascii[list_for_rand[index]];
@@ -70,7 +71,7 @@ map<string, char> make_table_for_encryption(map<string, int> map_for_encryption,
 
 
 void print_map(map<string, int> map_to_print) {
-  map<string, int>::iterator it = map_to_print.begin();
+	auto it = map_to_print.begin();
 
   while (it != map_to_print.end()) {
     cout << "Key: " << it->first
@@ -92,6 +93,7 @@ string work_with_input() {
     case KEYBOARD_INPUT:
     {
       text = keyboard_input();
+      saving_files_input(text, "input");
       //saving_files_input(text, "input");
       stop = true;
     }
@@ -121,7 +123,7 @@ map<string, int> make_graph_map(string str, int size) {
   for (int i = 0; i < str.length(); i+= size) {
     key_str = str.substr(i, size);
     replace(key_str.begin(), key_str.end(), ' ', '_');
-    cout << key_str << endl;
+   // cout << key_str << endl;
 
     if (graph_map.find(key_str) == graph_map.end()) {
       graph_map[key_str] = 1;
@@ -129,13 +131,65 @@ map<string, int> make_graph_map(string str, int size) {
       graph_map[key_str] += 1;
     }
   }
-  print_map(graph_map);
-  get_unused_ascii(str);
+  //print_map(graph_map);
+ // get_unused_ascii(str);
 
   return graph_map;
 }
 
-string get_encrypted_text(int size) {
+void encryption(string text, int size) {
+    string result_text{ "" };
+    map<string, int> graph_map = make_graph_map(text, size);
+    map<string, char> table = make_table_for_encryption(graph_map, text);
+    string key_str{ "" };
+
+    for (int i = 0; i < text.length(); i += size) {
+        key_str = text.substr(i, size);
+        replace(key_str.begin(), key_str.end(), ' ', '_');
+        result_text += table[key_str];
+    }
+
+    cout << endl << "Input text: " << endl << text << endl;
+    cout << endl << "Result for graph with " << size << " symbols:" << endl;
+    cout << result_text << endl << endl;
+    cout << "Table for decryprion:" << endl;
+    cout << "Symbol" << setw(10) << "Meaning" << endl;
+    auto it = table.begin();
+
+    while (it != table.end()) {
+        cout << it->first << setw(10) << it->second << endl;
+        ++it;
+    }
+    saving_files_table(table);
+}
+
+void decryption(string text, int size) {
+    string result_text{ "" };
+    map<string, int> graph_map = make_graph_map(text, size);
+    map<string, char> table = make_table_for_encryption(graph_map, text);
+    string key_str{ "" };
+
+    for (int i = 0; i < text.length(); i += size) {
+        key_str = text.substr(i, size);
+        replace(key_str.begin(), key_str.end(), ' ', '_');
+        result_text += table[key_str];
+    }
+
+    cout << endl << "Input text: " << text << endl;
+    cout << endl << "Result for graph with " << size << " symbols:" << endl;
+    cout << result_text << endl << endl;
+    cout << "Table for decryprion:" << endl;
+    cout << "Symbol" << setw(10) << "Meaning" << endl;
+    auto it = table.begin();
+
+    while (it != table.end()) {
+        cout << it->first << setw(10) << it->second << endl;
+        ++it;
+    }
+    saving_files_table(table);
+}
+
+void get_encrypted_text() {
   int user_choice;
   bool stop;
   string text{};
@@ -148,12 +202,13 @@ string get_encrypted_text(int size) {
 
     case ENCRYPT: {
       text = work_with_input();
+      encryption(text, 2);
       stop = true;
     }
     break;
 
     case DECRYPT: {
-
+        text = work_with_input();
       stop = true;
     }
     break;
@@ -165,29 +220,9 @@ string get_encrypted_text(int size) {
 
   } while (!stop);
 
-  string result_text{ "" };
-  map<string, int> graph_map = make_graph_map(text, size);
-  map<string, char> table = make_table_for_encryption(graph_map, text);
-  string key_str{ "" };
+  
 
-  for (int i = 0; i < text.length(); i += size) {
-    key_str = text.substr(i, size);
-    replace(key_str.begin(), key_str.end(), ' ', '_');
-    result_text += table[key_str];
-  }
-
-  cout << endl << "Result for graph with " << size << " symbols:" << endl;
-  cout << result_text << endl << endl;
-  cout << "Table for decryprion:" << endl;
-  cout << "Symbol" << setw(10) << "Meaning" << endl;
-  map<string, char>::iterator it = table.begin();
-
-  while (it != table.end()) {
-    cout << it->first << setw(10) << it->second << endl;
-    ++it;
-  }
-
-  return result_text;
+ // return result_text;
 }
 
 
