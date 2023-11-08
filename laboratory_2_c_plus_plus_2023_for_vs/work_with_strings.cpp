@@ -67,7 +67,6 @@ map<string, char> make_table_for_encryption(map<string, int> map_for_encryption,
   while (it != map_for_encryption.end()) {
     srand(time(nullptr));
     index = rand() % list_for_rand.size();
-    //index = (int)(tmp * 100) / 100.0;
     table[it->first] = all_ascii[list_for_rand[index]];
     list_for_rand.erase(list_for_rand.begin() + index);
     ++it;
@@ -142,6 +141,7 @@ map<string, int> make_graph_map(string str, int size) {
   return graph_map;
 }
 
+
 int encryption(string text, int size) {
     string result_text{ "" };
     map<string, int> graph_map = make_graph_map(text, size);
@@ -171,7 +171,7 @@ int encryption(string text, int size) {
       saving_files_table(table);
     }
 
-    return result_text.length() + table.size();
+    return (int)(result_text.length() + table.size());
 }
 
 void decryption(string text) {
@@ -244,5 +244,36 @@ void get_encrypted_text() {
 }
 
 
+string work_for_test(string text) {
+  map<string, int> graph_map = make_graph_map(text, TRIGRAPH);
+  map<string, char> table;
+  vector<char> all_ascii = get_unused_ascii(text);
 
+  vector<int> list_for_rand;
+  for (int i = 0; i < all_ascii.size(); i++) {
+    list_for_rand.push_back(i);
+  }
+
+  int index{ 0 };
+
+  auto it = graph_map.begin();
+  while (it != graph_map.end()) {
+
+    table[it->first] = all_ascii[list_for_rand[index]];
+    list_for_rand.erase(list_for_rand.begin() + index);
+    ++it;
+    index++;
+  }
+
+  string result_text{ "" };
+  string key_str{ "" };
+
+  for (int i = 0; i < text.length(); i += TRIGRAPH) {
+    key_str = text.substr(i, TRIGRAPH);
+    replace(key_str.begin(), key_str.end(), ' ', '_');
+    result_text += table[key_str];
+  }
+
+  return result_text;
+}
 

@@ -2,7 +2,7 @@
 #include "beginning.h"
 #include "checking_errors.h"
 #include "work_with_strings.h"
-//#include "test.h"
+#include "test.h"
 
 using  namespace std;
 
@@ -30,14 +30,13 @@ int main() {
       switch (user_choice) {
 
       case TEXT_WORK: {
-        string text = "hehehe  hello mym  my nema ff";
         get_encrypted_text();
         stop = true;
         break;
       }
 
       case TEXT_TEST: {
-        //checking_tests();
+        checking_tests();
         stop = true;
         break;
       }
