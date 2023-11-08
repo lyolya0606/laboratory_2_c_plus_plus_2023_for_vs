@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <windows.h>
 #include <algorithm>
 #include <list>
 #include <vector>
@@ -149,9 +150,9 @@ void encryption(string text, int size) {
         result_text += table[key_str];
     }
 
-    cout << endl << "Input text: " << endl << text << endl;
+    cout << endl << "Input text: " << endl << "\033[1;32m" << text << "\033[0m" << endl;
     cout << endl << "Result for graph with " << size << " symbols:" << endl;
-    cout << result_text << endl << endl;
+    cout << "\033[1;32m" << result_text << "\033[0m" << endl << endl;
     cout << "Table for decryprion:" << endl;
     cout << "Symbol" << setw(10) << "Meaning" << endl;
     auto it = table.begin();
@@ -160,33 +161,29 @@ void encryption(string text, int size) {
         cout << it->first << setw(10) << it->second << endl;
         ++it;
     }
+    saving_files_input(result_text, "output");
     saving_files_table(table);
 }
 
-void decryption(string text, int size) {
-    string result_text{ "" };
-    map<string, int> graph_map = make_graph_map(text, size);
-    map<string, char> table = make_table_for_encryption(graph_map, text);
-    string key_str{ "" };
+void decryption(string text) {
+  cout << "The table for decryption  must be in the file." << endl;
+  map<string, char> table = file_input_table();
+  string result_text{ "" };
 
-    for (int i = 0; i < text.length(); i += size) {
-        key_str = text.substr(i, size);
-        replace(key_str.begin(), key_str.end(), ' ', '_');
-        result_text += table[key_str];
+  for (char c : text) {
+    for (auto& it : table) {
+
+      if (it.second == c) {
+        result_text += it.first;
+      }
     }
+  }
 
-    cout << endl << "Input text: " << text << endl;
-    cout << endl << "Result for graph with " << size << " symbols:" << endl;
-    cout << result_text << endl << endl;
-    cout << "Table for decryprion:" << endl;
-    cout << "Symbol" << setw(10) << "Meaning" << endl;
-    auto it = table.begin();
-
-    while (it != table.end()) {
-        cout << it->first << setw(10) << it->second << endl;
-        ++it;
-    }
-    saving_files_table(table);
+  cout << endl << "Input text:" << endl << "\033[1;32m" << text << "\033[0m" << endl;
+  cout << endl << "Result of the decryprion:" << endl;
+  cout << "\033[1;32m" << result_text << "\033[0m" << endl << endl;
+  cout << "Table for decryprion:" << endl;
+  cout << "Symbols" << setw(10) << "Meaning" << endl;
 }
 
 void get_encrypted_text() {
@@ -208,7 +205,8 @@ void get_encrypted_text() {
     break;
 
     case DECRYPT: {
-        text = work_with_input();
+      text = work_with_input();
+      decryption(text);
       stop = true;
     }
     break;
@@ -219,10 +217,6 @@ void get_encrypted_text() {
     }
 
   } while (!stop);
-
-  
-
- // return result_text;
 }
 
 

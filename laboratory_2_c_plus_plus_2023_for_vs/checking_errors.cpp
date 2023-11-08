@@ -19,7 +19,7 @@ int get_int() {
 }
 
 bool is_letter(char symbol) {
-  return (symbol >= 'a' && symbol <= 'z') || (symbol >= 'A' && symbol <= 'Z');
+  return ((!symbol < ' ' || symbol > '~'));
 }
 
 bool are_good_symbols(string str) {
