@@ -14,5 +14,5 @@ void menu_work_text() {
 
 void menu_encr_or_decr() {
   cout << endl << "Press 1 to encrypt" << endl
-    << "Press 2 to decrpypt" << endl;
+    << "Press 2 to decrypt" << endl;
 }

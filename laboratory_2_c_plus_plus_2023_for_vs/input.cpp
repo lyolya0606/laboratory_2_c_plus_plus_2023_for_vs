@@ -1,10 +1,9 @@
-//
-// Created by lyolya on 07.09.2023.
-//
 #include <iostream>
 #include <string>
+#include <map>
 #include <fstream>
 #include "checking_errors.h"
+#include <iomanip>
 
 using namespace std;
 
@@ -48,5 +47,51 @@ string keyboard_input() {
   }
 
   return text;
+}
+
+map<string, char> file_input_table() {
+  string str;
+  ifstream file;
+  bool flag;
+  map<string, char> table;
+
+  do {
+    table.clear();
+    flag = true;
+    file = open_file_input();
+
+    while (true) {
+      getline(file, str);
+      if (str == "") {
+        break;
+      }
+      try {
+        string delimiter = "-";
+        string symbols = str.substr(0, str.find(delimiter));
+        char meaning = str.substr(str.find(delimiter) + 1, 1)[0];
+        table[symbols] = meaning;
+        if ((!are_good_symbols(symbols)) || (!is_letter(meaning))) {
+          cout << "File has bad symbols. Please, try again." << endl;
+          flag = false;
+        }
+      } catch (exception) {
+        cout << "Misrepresentation of data! Please, check the file. Table should look like: symbols-meaning." << endl;
+        flag = false;
+      }
+    }
+  } while (!flag);
+
+  file.close();
+  cout << "Table for decryprion:" << endl;
+  cout << "Symbols" << setw(10) << "Meaning" << endl;
+  cout << "Read data:" << endl;
+  auto it = table.begin();
+
+  while (it != table.end()) {
+    cout << it->first << setw(10) << it->second << endl;
+    ++it;
+  }
+
+  return table;
 }
 
