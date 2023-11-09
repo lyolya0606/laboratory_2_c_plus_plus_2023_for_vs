@@ -158,11 +158,11 @@ int encryption(string text, int size) {
     cout << endl << "Result for graph with " << size << " symbols:" << endl;
     cout << "\033[1;32m" << result_text << "\033[0m" << endl << endl;
     cout << "Table for decryprion:" << endl;
-    cout << "Symbol" << setw(10) << "Meaning" << endl;
+    cout  << "Symbol" << setw(10) << "Meaning" << endl;
     auto it = table.begin();
 
     while (it != table.end()) {
-        cout << it->first << setw(10) << it->second << endl;
+        cout << setw(3) << it->first << setw(10) << it->second << endl;
         ++it;
     }
 
@@ -197,7 +197,7 @@ void conclusion(string text, int result_of_digraph, int result_of_trigraph) {
   double size_of_digraph = (double)result_of_digraph / (double)text.length();
   double size_of_trigraph = (double)result_of_trigraph / (double)text.length();
 
-  //cout << endl << "Input text has " << "\033[1;34m" << text.length() << "\033[0m" << " symbols" << endl;
+  cout << endl << "\033[1;34m" << "CONCLUSION" << "\033[0m" << endl;
   cout << endl;
   if (size_of_digraph > size_of_trigraph) {
     cout << "Digraph's compression ratio (" << "\033[1;31m" << setprecision(2) << size_of_digraph << "\033[0m"

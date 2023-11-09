@@ -54,7 +54,7 @@ ofstream open_file_output() {
       existFile.close();
 
       if (stringGeneral.length() != FILE_HAS_DATA) {
-        cout << "This file has some data. Do you want to overwrite the file?" << endl
+        cout << endl << "This file has some data. Do you want to overwrite the file?" << endl
           << "Press 1 if you want to overwrite this file" << endl
           << "Press 2 if you DON'T want to overwrite this file" << endl;
 

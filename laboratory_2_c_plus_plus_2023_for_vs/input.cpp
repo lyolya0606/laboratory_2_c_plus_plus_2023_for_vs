@@ -68,8 +68,8 @@ map<string, char> file_input_table() {
       try {
         string delimiter = "-";
         auto pos = str.find(delimiter);
-        if (pos == std::string::npos) {
-          std::cout << "Olyaya does not smoke duda :(. Give her a dudka" << std::endl;
+        if (pos == string::npos) {
+          cout << "Misrepresentation of data! Please, check the file. Table should look like: symbols-meaning." << endl;
           flag = false;
           break;
         }
@@ -89,12 +89,12 @@ map<string, char> file_input_table() {
 
   file.close();
   cout << "Table for decryprion:" << endl;
-  cout << "Symbols" << setw(10) << "Meaning" << endl;
   cout << "Read data:" << endl;
+  cout  << "Symbols" << setw(10) << "Meaning" << endl;
   auto it = table.begin();
 
   while (it != table.end()) {
-    cout << it->first << setw(10) << it->second << endl;
+    cout << setw(3) << it->first << setw(10) << it->second << endl;
     ++it;
   }
 
