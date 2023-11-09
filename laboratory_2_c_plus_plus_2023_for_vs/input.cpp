@@ -67,8 +67,14 @@ map<string, char> file_input_table() {
       }
       try {
         string delimiter = "-";
-        string symbols = str.substr(0, str.find(delimiter));
-        char meaning = str.substr(str.find(delimiter) + 1, 1)[0];
+        auto pos = str.find(delimiter);
+        if (pos == std::string::npos) {
+          std::cout << "Olyaya does not smoke duda :(. Give her a dudka" << std::endl;
+          flag = false;
+          break;
+        }
+        string symbols = str.substr(0, pos);
+        char meaning = str.substr(pos + 1, 1)[0];
         table[symbols] = meaning;
         if ((!are_good_symbols(symbols)) || (!is_letter(meaning))) {
           cout << "File has bad symbols. Please, try again." << endl;
