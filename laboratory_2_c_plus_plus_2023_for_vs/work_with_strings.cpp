@@ -63,9 +63,10 @@ map<string, char> make_table_for_encryption(map<string, int> map_for_encryption,
 
   int index{ -1 };
 
+
   auto it = map_for_encryption.begin();
   while (it != map_for_encryption.end()) {
-    srand(time(nullptr));
+    srand((unsigned int)time(nullptr));
     index = rand() % list_for_rand.size();
     table[it->first] = all_ascii[list_for_rand[index]];
     list_for_rand.erase(list_for_rand.begin() + index);

@@ -45,7 +45,6 @@ void saving_files_table(map<string, char> table) {
         cout << "There is no such choice!" << endl << endl
             << "Press 1 if you want to save your the table in the file" << endl
             << "Press 2 if you DON'T want to save your the table in the file" << endl;
-
         choice = get_int();
     }
 
