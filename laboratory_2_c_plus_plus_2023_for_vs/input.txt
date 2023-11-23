@@ -1,1 +1,4 @@
-Olyaya smokes dudka
+Laboratory work 2, variant 3
+Write a program that implements dictionary construction algorithms,
+encoding and decoding.
+Student of group number 404, Bezdudnaya Olga. 2023 year.

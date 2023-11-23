@@ -22,7 +22,7 @@ string file_input() {
   }
 
   while (!are_good_symbols(text)) {
-    cout << "File has bad symbols. Please, try again." << endl;
+    cout << endl << "File has bad symbols. Please, try again." << endl;
     file = open_file_input();
     while (!file.eof()) {
       getline(file, str);
@@ -42,7 +42,7 @@ string keyboard_input() {
 
   while (!are_good_symbols(text)) {
     cout << "You entered bad symbols. Please, try again." << endl;
-    cout << "Write the text:" << endl;
+    cout << endl << "Write the text:" << endl;
     getline(cin, text, '\n');
   }
 
@@ -69,7 +69,7 @@ map<string, char> file_input_table() {
         string delimiter = "-";
         auto pos = str.find(delimiter);
         if (pos == string::npos) {
-          cout << "Misrepresentation of data! Please, check the file. Table should look like: symbols-meaning." << endl;
+          cout << endl << "Misrepresentation of data! Please, check the file. Table should look like: symbols-meaning." << endl;
           flag = false;
           break;
         }
@@ -77,18 +77,18 @@ map<string, char> file_input_table() {
         char meaning = str.substr(pos + 1, 1)[0];
         table[symbols] = meaning;
         if ((!are_good_symbols(symbols)) || (!is_letter(meaning))) {
-          cout << "File has bad symbols. Please, try again." << endl;
+          cout << endl << "File has bad symbols. Please, try again." << endl;
           flag = false;
         }
       } catch (exception) {
-        cout << "Misrepresentation of data! Please, check the file. Table should look like: symbols-meaning." << endl;
+        cout << endl  << "Misrepresentation of data! Please, check the file. Table should look like: symbols-meaning." << endl;
         flag = false;
       }
     }
   } while (!flag);
 
   file.close();
-  cout << "Table for decryprion:" << endl;
+  cout << endl << "Table for decryprion:" << endl;
   cout << "Read data:" << endl;
   cout  << "Symbols" << setw(10) << "Meaning" << endl;
   auto it = table.begin();

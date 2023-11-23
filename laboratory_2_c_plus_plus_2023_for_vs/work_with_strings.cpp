@@ -42,12 +42,12 @@ vector<char> get_unused_ascii(string text) {
   }*/
 
 
-  for (char c : text) {
+  /*for (char c : text) {
     if (find(all_ascii.begin(), all_ascii.end(), c) != all_ascii.end()) {
       auto it = find(all_ascii.begin(), all_ascii.end(), c);
       all_ascii.erase(it);
     }
-  }
+  }*/
   return all_ascii;
 
 }
